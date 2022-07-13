@@ -1,0 +1,246 @@
+SQL> create table Employee(Emp_no int,Emp_name varchar(20),Salary int,Deptno int,
+);
+
+Table created.
+
+
+
+SQL> describe Employee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_NO                                             NUMBER(38)
+ EMP_NAME                                           VARCHAR2(20)
+ SALARY                                             NUMBER(38)
+ DEPTNO                                             NUMBER(38)
+ JOB                                                VARCHAR2(60)
+
+SQL> insert into Employee(Emp_no,Emp_name,Salary,Deptno,Job) Values(1,'Anu',25000,10,'Teacher');
+
+1 row created.
+
+SQL>  insert into Employee(Emp_no,Emp_name,Salary,Deptno,Job) Values(2,'Anoop',30000,11,'Manager');
+
+1 row created.
+
+SQL>  insert into Employee(Emp_no,Emp_name,Salary,Deptno,Job) Values(3,'Paul',20000,12,'Mechanic');
+
+1 row created.
+
+SQL>  insert into Employee(Emp_no,Emp_name,Salary,Deptno,Job) Values(4,'Arjun',25500,13,'Teacher');
+
+1 row created.
+
+SQL>  insert into Employee(Emp_no,Emp_name,Salary,Deptno,Job) Values(5,'Hijas',26000,10,'Teacher');
+
+1 row created.
+
+SQL>  insert into Employee(Emp_no,Emp_name,Salary,Deptno,Job) Values(6,'Anand',26000,10,'Teacher');
+
+1 row created.
+
+SQL>  insert into Employee(Emp_no,Emp_name,Salary,Deptno,Job) Values(7,'Nikhil',27000,13,'Teacher');
+
+
+1 row created.
+
+SQL>  insert into Employee(Emp_no,Emp_name,Salary,Deptno,Job) Values(8,'Ashik',27000,13,'Teacher');
+
+1 row created.
+
+SQL>  insert into Employee(Emp_no,Emp_name,Salary,Deptno,Job) Values(9,'Ajaz',27000,13,'Teacher');
+
+1 row created.
+
+SQL>  insert into Employee(Emp_no,Emp_name,Salary,Deptno,Job) Values(5,'Noyal',27000,13,'Teacher');
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from Employee;
+
+    EMP_NO EMP_NAME                 SALARY     DEPTNO
+---------- -------------------- ---------- ----------
+JOB
+------------------------------------------------------------
+         1 Anu                       25000         10
+Teacher
+
+         2 Anoop                     30000         11
+Manager
+
+         3 Paul                      20000         12
+Mechanic
+
+
+    EMP_NO EMP_NAME                 SALARY     DEPTNO
+---------- -------------------- ---------- ----------
+JOB
+------------------------------------------------------------
+         4 Arjun                     25500         13
+Teacher
+
+         5 Hijas                     26000         10
+Teacher
+
+         6 Anand                     26000         10
+Teacher
+
+
+    EMP_NO EMP_NAME                 SALARY     DEPTNO
+---------- -------------------- ---------- ----------
+JOB
+------------------------------------------------------------
+         7 Nikhil                    27000         13
+Teacher
+
+         8 Ashik                     27000         13
+Teacher
+
+         9 Ajaz                      27000         13
+Teacher
+
+
+    EMP_NO EMP_NAME                 SALARY     DEPTNO
+---------- -------------------- ---------- ----------
+JOB
+------------------------------------------------------------
+         5 Noyal                     27000         13
+Teacher
+
+
+10 rows selected.
+
+SQL> select * from Employee order by Salary asc;
+
+    EMP_NO EMP_NAME                 SALARY     DEPTNO
+---------- -------------------- ---------- ----------
+JOB
+------------------------------------------------------------
+         3 Paul                      20000         12
+Mechanic
+
+         1 Anu                       25000         10
+Teacher
+
+         4 Arjun                     25500         13
+Teacher
+
+
+    EMP_NO EMP_NAME                 SALARY     DEPTNO
+---------- -------------------- ---------- ----------
+JOB
+------------------------------------------------------------
+         5 Hijas                     26000         10
+Teacher
+
+         6 Anand                     26000         10
+Teacher
+
+         9 Ajaz                      27000         13
+Teacher
+
+
+    EMP_NO EMP_NAME                 SALARY     DEPTNO
+---------- -------------------- ---------- ----------
+JOB
+------------------------------------------------------------
+         7 Nikhil                    27000         13
+Teacher
+
+         8 Ashik                     27000         13
+Teacher
+
+         5 Noyal                     27000         13
+Teacher
+
+
+    EMP_NO EMP_NAME                 SALARY     DEPTNO
+---------- -------------------- ---------- ----------
+JOB
+------------------------------------------------------------
+         2 Anoop                     30000         11
+Manager
+
+
+10 rows selected.
+
+SQL> Select * from Employee where Deptno=13;
+
+    EMP_NO EMP_NAME                 SALARY     DEPTNO
+---------- -------------------- ---------- ----------
+JOB
+------------------------------------------------------------
+         4 Arjun                     25500         13
+Teacher
+
+         7 Nikhil                    27000         13
+Teacher
+
+         8 Ashik                     27000         13
+Teacher
+
+
+    EMP_NO EMP_NAME                 SALARY     DEPTNO
+---------- -------------------- ---------- ----------
+JOB
+------------------------------------------------------------
+         9 Ajaz                      27000         13
+Teacher
+
+         5 Noyal                     27000         13
+Teacher
+
+
+SQL> Select Emp_name from Employee where Job=(Select Job from Employee where Emp_name='Arjun');
+
+EMP_NAME
+--------------------
+Anu
+Arjun
+Hijas
+Anand
+Nikhil
+Ashik
+Ajaz
+Noyal
+
+8 rows selected.
+
+SQL> select count(Emp_no) from Employee;
+
+COUNT(EMP_NO)
+-------------
+           10
+
+SQL> Select distinct Deptno from Employee;
+
+    DEPTNO
+----------
+        11
+        13
+        10
+        12
+
+SQL> Select * from Employee where Job like 'M%';
+
+    EMP_NO EMP_NAME                 SALARY     DEPTNO
+---------- -------------------- ---------- ----------
+JOB
+------------------------------------------------------------
+         2 Anoop                     30000         11
+Manager
+
+         3 Paul                      20000         12
+Mechanic
+
+
+SQL> Select Salary from Employee where Salary=(Select min(Salary) from Employee)Union Select Salary 
+from Employee Where Salary=(Select max(Salary) from Employee);
+
+    SALARY
+----------
+     20000
+     30000

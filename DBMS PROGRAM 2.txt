@@ -1,0 +1,189 @@
+SQL> create table Employee1(Emp_no int,Emp_name varchar(20),Job varchar(30), Bp int,Dept varchar(30)
+);
+
+Table created.
+
+SQL> describe Employee1;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_NO                                             NUMBER(38)
+ EMP_NAME                                           VARCHAR2(20)
+ JOB                                                VARCHAR2(30)
+ BP                                                 NUMBER(38)
+ DEPT                                               VARCHAR2(30)
+
+SQL> insert into Employee1(Emp_no,Emp_name,Job,Bp,Dept) values (1,'Arun','Clerk',50000,'KSEB');
+
+1 row created.
+
+SQL> insert into Employee1(Emp_no,Emp_name,Job,Bp,Dept) values (2,'Manu','Manager',50000,'Production
+');
+
+1 row created.
+
+SQL> insert into Employee1(Emp_no,Emp_name,Job,Bp,Dept) values (3,'Anu','Nurse',30000,'ENT');
+
+1 row created.
+
+SQL> insert into Employee1(Emp_no,Emp_name,Job,Bp,Dept) values (4,'Sree','Electrician',20000,'Electr
+ical');
+
+1 row created.
+
+SQL> insert into Employee1(Emp_no,Emp_name,Job,Bp,Dept) values (5,'Balu','Analyst',10000,'Audit');
+
+1 row created.
+
+SQL> select * from Employee1;
+
+    EMP_NO EMP_NAME             JOB                                    BP
+---------- -------------------- ------------------------------ ----------
+DEPT
+------------------------------
+         1 Arun                 Clerk                               50000
+KSEB
+
+         2 Manu                 Manager                             50000
+Production
+
+         3 Anu                  Nurse                               30000
+ENT
+
+
+    EMP_NO EMP_NAME             JOB                                    BP
+---------- -------------------- ------------------------------ ----------
+DEPT
+------------------------------
+         4 Sree                 Electrician                         20000
+Electrical
+
+         5 Balu                 Analyst                             10000
+Audit
+
+
+SQL> Select * from Employee1 order by Emp_no asc;
+
+    EMP_NO EMP_NAME             JOB                                    BP
+---------- -------------------- ------------------------------ ----------
+DEPT
+------------------------------
+         1 Arun                 Clerk                               50000
+KSEB
+
+         2 Manu                 Manager                             50000
+Production
+
+         3 Anu                  Nurse                               30000
+ENT
+
+
+    EMP_NO EMP_NAME             JOB                                    BP
+---------- -------------------- ------------------------------ ----------
+DEPT
+------------------------------
+         4 Sree                 Electrician                         20000
+Electrical
+
+         5 Balu                 Analyst                             10000
+Audit
+
+
+SQL> select bp/2 from Employee1;
+
+      BP/2
+----------
+     25000
+     25000
+     15000
+     10000
+      5000
+
+SQL> Select * from Employee1 where Emp_name like 'B%';
+
+    EMP_NO EMP_NAME             JOB                                    BP
+---------- -------------------- ------------------------------ ----------
+DEPT
+------------------------------
+         5 Balu                 Analyst                             10000
+Audit
+
+
+SQL> Select Emp_name from Employee1 where (Emp_name like '_i%' or Emp_name like '_u%');
+
+no rows selected
+
+SQL> Select Emp_name from Employee1 where (Emp_name like '_r%'or Emp_name like '_a%');
+
+EMP_NAME
+--------------------
+Arun
+Manu
+Sree
+Balu
+
+SQL> Select * from Employee1 where Bp between 10000 and 30000;
+
+    EMP_NO EMP_NAME             JOB                                    BP
+---------- -------------------- ------------------------------ ----------
+DEPT
+------------------------------
+         3 Anu                  Nurse                               30000
+ENT
+
+         4 Sree                 Electrician                         20000
+Electrical
+
+         5 Balu                 Analyst                             10000
+Audit
+
+
+SQL> select distinct Job from Employee1;
+
+JOB
+------------------------------
+Clerk
+Manager
+Analyst
+Electrician
+Nurse
+
+SQL> Select Emp_name,Bp from Employee1 where Bp not between 5000 and 12000 and Dept in ('KSEB','Prod
+uction','Analyst');
+
+EMP_NAME                     BP
+-------------------- ----------
+Arun                      50000
+Manu                      50000
+SQL> Select * from Employee1 order by Bp Desc;
+
+    EMP_NO EMP_NAME             JOB                                    BP
+---------- -------------------- ------------------------------ ----------
+DEPT
+------------------------------
+         1 Arun                 Clerk                               50000
+KSEB
+
+         2 Manu                 Manager                             50000
+Production
+
+         3 Anu                  Nurse                               30000
+ENT
+
+
+    EMP_NO EMP_NAME             JOB                                    BP
+---------- -------------------- ------------------------------ ----------
+DEPT
+------------------------------
+         4 Sree                 Electrician                         20000
+Electrical
+
+         5 Balu                 Analyst                             10000
+Audit
+
+
+SQL> Select Emp_name,Job from Employee1 where Job in('Clerk','Manage','Analyst');
+
+EMP_NAME             JOB
+-------------------- ------------------------------
+Arun                 Clerk
+Balu                 Analyst
